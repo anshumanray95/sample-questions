@@ -4,12 +4,10 @@ public class SimpleCalculator {
 public static void main(String[] args) {
 Scanner scanner = new Scanner(System.in);
 
-```
     try {
         System.out.print("Enter an operation (e.g., 3+5): ");
         String expression = scanner.nextLine();
 
-        // Check if the input format is correct
         if (expression.length() != 3) {
             throw new IllegalArgumentException("Please enter in the correct format, like 3+5.");
         }
@@ -19,7 +17,6 @@ Scanner scanner = new Scanner(System.in);
         int secondNum = Character.getNumericValue(expression.charAt(2));
         int result;
 
-        // Perform operation based on the operator
         switch (operator) {
             case '+':
                 result = firstNum + secondNum;
@@ -51,6 +48,5 @@ Scanner scanner = new Scanner(System.in);
         System.out.println("Calculator closed. Thanks for using it!");
     }
 }
-```
 
 }
