@@ -1,30 +1,33 @@
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
-public class HashSetSolution {
-    public static void main(String[] args) {
-        Set<Integer> hs1 = new HashSet<>();
-        Set<Integer> hs2 = new HashSet<>();
+public class FriendlyHashSetExample {
+public static void main(String[] args) {
+Set<Integer> firstSet = new HashSet<>(Arrays.asList(11, 78, 90, 76, 56));
+Set<Integer> secondSet = new HashSet<>(Arrays.asList(14, 78, 45, 98, 90));
 
-        hs1.add(11);
-        hs1.add(78);
-        hs1.add(90);
-        hs1.add(76);
-        hs1.add(56);
+    System.out.println("First Set: " + firstSet);
+    System.out.println("Second Set: " + secondSet);
 
-        hs2.add(14);
-        hs2.add(78);
-        hs2.add(45);
-        hs2.add(98);
-        hs2.add(90);
+    Set<Integer> uniqueElements = new HashSet<>(firstSet);
+    uniqueElements.removeAll(secondSet);
 
-        Set<Integer> resultantSet = hs1;
-        resultantSet.removeAll(hs2);
-        System.out.println(resultantSet);
-        int max = resultantSet.stream().max(Comparator.naturalOrder()).get();
-        int min = resultantSet.stream().min(Comparator.naturalOrder()).get();
-        System.out.println("The Answer is : " + (max+min));
+    System.out.println("Unique elements from the first set: " + uniqueElements);
+
+    if (uniqueElements.isEmpty()) {
+        System.out.println("No unique elements found in the first set!");
+        return;
     }
+
+    Optional<Integer> maxVal = uniqueElements.stream().max(Comparator.naturalOrder());
+    Optional<Integer> minVal = uniqueElements.stream().min(Comparator.naturalOrder());
+
+    if (maxVal.isPresent() && minVal.isPresent()) {
+        int result = maxVal.get() + minVal.get();
+        System.out.println("The Answer is: " + result);
+    } else {
+        System.out.println("Unable to determine max and min values.");
+    }
+}
+
+
 }
