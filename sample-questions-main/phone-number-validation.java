@@ -1,29 +1,34 @@
 import java.util.Scanner;
 
-public class PhoneNumberValidation {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        try {
-            System.out.println("Enter the phone number: ");
-            String input = sc.next();
+public class FriendlyPhoneNumberValidator {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
 
-            if (input.length() < 10) {
-                throw new IllegalArgumentException("You have entered less than 10 digits.");
-            } else if (input.length() > 10) {
-                throw new IllegalArgumentException("You have entered more than 10 digits.");
-            }
+    try {
+        System.out.print("Please enter your 10-digit phone number: ");
+        String phone = scanner.nextLine().trim();
 
-            for (char c : input.toCharArray()) {
-                if (!Character.isDigit(c)) {
-                    throw new IllegalArgumentException("You have entered a character instead of a digit.");
-                }
-            }
-
-            System.out.println("Valid mobile phone number: " + input);
-        } catch (IllegalArgumentException e) {
-            System.out.println("IllegalArgumentException: " + e.getMessage());
-        } finally {
-            sc.close();
+        if (phone.length() < 10) {
+            throw new IllegalArgumentException("Oops! That looks short — phone numbers must have exactly 10 digits.");
+        } else if (phone.length() > 10) {
+            throw new IllegalArgumentException("That’s too long — phone numbers should only have 10 digits.");
         }
+
+        for (char ch : phone.toCharArray()) {
+            if (!Character.isDigit(ch)) {
+                throw new IllegalArgumentException("Invalid input — only digits are allowed in a phone number.");
+            }
+        }
+
+        System.out.println("✅ Valid mobile number: " + phone);
+    } 
+    catch (IllegalArgumentException e) {
+        System.out.println("Error: " + e.getMessage());
+    } 
+    finally {
+        scanner.close();
+        System.out.println("Thank you for using the phone number validator!");
     }
+}
+
 }
