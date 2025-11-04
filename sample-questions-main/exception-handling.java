@@ -1,54 +1,56 @@
 import java.util.Scanner;
 
-public class ExceptionHandlingProgram {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        try {
-            System.out.println("Enter the input: ");
-            String input = sc.next();
+public class SimpleCalculator {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
 
+```
+    try {
+        System.out.print("Enter an operation (e.g., 3+5): ");
+        String expression = scanner.nextLine();
 
-            if (input.length() != 3) {
-                throw new IllegalArgumentException("Invalid operation");
-            }
-
-            char operator = input.charAt(1);
-            int num1 = Character.getNumericValue(input.charAt(0));
-            int num2 = Character.getNumericValue(input.charAt(2));
-
-
-            switch (operator) {
-                case '+':
-                    System.out.println(num1 + num2);
-                    break;
-                case '-':
-                    System.out.println(num1 - num2);
-                    break;
-                case '*':
-                    System.out.println(num1 * num2);
-                    break;
-                case '/':
-
-                    if (num2 == 0) {
-                        throw new ArithmeticException("Division by zero is not allowed");
-                    }
-                    System.out.println(num1 / num2);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid operation");
-            }
+        // Check if the input format is correct
+        if (expression.length() != 3) {
+            throw new IllegalArgumentException("Please enter in the correct format, like 3+5.");
         }
 
-        catch (ArithmeticException e) {
-            System.out.println("ArithmeticException: " + e.getMessage());
-        }
-        
-        catch (IllegalArgumentException e) {
-            System.out.println("IllegalArgumentException: " + e.getMessage());
+        char operator = expression.charAt(1);
+        int firstNum = Character.getNumericValue(expression.charAt(0));
+        int secondNum = Character.getNumericValue(expression.charAt(2));
+        int result;
+
+        // Perform operation based on the operator
+        switch (operator) {
+            case '+':
+                result = firstNum + secondNum;
+                break;
+            case '-':
+                result = firstNum - secondNum;
+                break;
+            case '*':
+                result = firstNum * secondNum;
+                break;
+            case '/':
+                if (secondNum == 0) {
+                    throw new ArithmeticException("You can’t divide by zero!");
+                }
+                result = firstNum / secondNum;
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported operator. Use +, -, *, or /.");
         }
 
-        finally {
-            sc.close();
-        }
+        System.out.println("Result: " + result);
+
+    } catch (ArithmeticException e) {
+        System.out.println("Oops! " + e.getMessage());
+    } catch (IllegalArgumentException e) {
+        System.out.println("Invalid input: " + e.getMessage());
+    } finally {
+        scanner.close();
+        System.out.println("Calculator closed. Thanks for using it!");
     }
+}
+```
+
 }
